@@ -36,7 +36,7 @@ export MIND_API_KEY=your_key_here
 
 Adds the MIND MCP server to your Claude Desktop / Claude Code config. Restart your client to activate.
 
-Get an API key: [mind.so](https://mind.so)
+Get an API key: [mindprotocol.xyz](https://www.mindprotocol.xyz)
 
 ## Skill structure
 
@@ -70,7 +70,7 @@ Claude will call `mind_risk_scoring`, return a score and decision, and give you 
 Attach the hash to your transaction record. Later:
 
 ```
-GET https://api.mind.so/v1/proof/{hash}
+GET https://api.mindprotocol.xyz/v1/proof/{hash}
 ```
 
 Returns the exact inputs and response the agent used. Useful for:

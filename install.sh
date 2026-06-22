@@ -6,7 +6,7 @@ MIND_MCP_ENTRY='{
     "command": "npx",
     "args": ["-y", "@mind/mcp-server"],
     "env": {
-      "MIND_API_URL": "'"${MIND_API_URL:-https://api.mind.so}"'",
+      "MIND_API_URL": "'"${MIND_API_URL:-https://api.mindprotocol.xyz}"'",
       "MIND_API_KEY": "'"${MIND_API_KEY:-}"'"
     }
   }

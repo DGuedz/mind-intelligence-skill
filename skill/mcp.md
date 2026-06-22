@@ -21,7 +21,7 @@ Add to your MCP config:
       "command": "npx",
       "args": ["-y", "@mind/mcp-server"],
       "env": {
-        "MIND_API_URL": "https://api.mind.so",
+        "MIND_API_URL": "https://api.mindprotocol.xyz",
         "MIND_API_KEY": "your_key_here"
       }
     }

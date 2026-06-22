@@ -29,7 +29,7 @@ Real-time price and momentum indicators from Pyth oracle, via the `mind_signals`
   "mindprint": {
     "hash": "0xabc...",
     "slot": 312948201,
-    "proof_url": "https://api.mind.so/v1/proof/0xabc..."
+    "proof_url": "https://api.mindprotocol.xyz/v1/proof/0xabc..."
   }
 }
 ```

@@ -9,7 +9,7 @@ Every MIND tool response includes a `mindprint` — a tamper-evident proof of th
   "mindprint": {
     "hash": "0xabc123...",
     "slot": 312948201,
-    "proof_url": "https://api.mind.so/v1/proof/0xabc123..."
+    "proof_url": "https://api.mindprotocol.xyz/v1/proof/0xabc123..."
   }
 }
 ```
@@ -50,7 +50,7 @@ Without proofs, agents can claim anything. A mindprint lets you:
 ## Verification endpoint
 
 ```
-GET https://api.mind.so/v1/proof/{hash}
+GET https://api.mindprotocol.xyz/v1/proof/{hash}
 ```
 
 Public, no auth required. Returns 200 with proof data or 404 if not found.

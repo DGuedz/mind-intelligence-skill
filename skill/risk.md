@@ -24,7 +24,7 @@ Concentration risk analysis for Solana wallets. Returns a 0–100 score and a PA
   "mindprint": {
     "hash": "0x789...",
     "slot": 312948210,
-    "proof_url": "https://api.mind.so/v1/proof/0x789..."
+    "proof_url": "https://api.mindprotocol.xyz/v1/proof/0x789..."
   }
 }
 ```

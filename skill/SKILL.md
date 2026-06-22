@@ -23,7 +23,7 @@ MIND gives your agent real-time market intelligence with built-in auditability. 
 ./install.sh
 
 # Required env vars
-MIND_API_URL=https://api.mind.so   # or your self-hosted endpoint
+MIND_API_URL=https://api.mindprotocol.xyz   # or your self-hosted endpoint
 MIND_API_KEY=your_key_here
 ```
 

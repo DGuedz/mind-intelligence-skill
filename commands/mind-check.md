@@ -28,7 +28,7 @@ Proofs:
   signals  → 0xabc123...
   risk     → 0xdef456...
 
-Verify: https://api.mind.so/v1/proof/{hash}
+Verify: https://api.mindprotocol.xyz/v1/proof/{hash}
 ```
 
 ## When decision is BLOCK

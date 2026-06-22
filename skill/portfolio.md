@@ -38,7 +38,7 @@ On-chain wallet intelligence: token balances and portfolio composition for any S
   "mindprint": {
     "hash": "0xdef...",
     "slot": 312948205,
-    "proof_url": "https://api.mind.so/v1/proof/0xdef..."
+    "proof_url": "https://api.mindprotocol.xyz/v1/proof/0xdef..."
   }
 }
 ```
