@@ -35,22 +35,61 @@ This is the trust layer A2A protocols need to operate on Solana without a human 
 ## Install
 
 ```bash
+git clone https://github.com/mindprotocol/mind-intelligence-skill
+cd mind-intelligence-skill
+./install.sh
+```
+
+No API key required for x402 mode. The agent pays per call in USDC fractions automatically.
+
+## Two ways to use
+
+### Option 1 — x402 micropayments (no registration)
+
+```bash
+curl https://api.mindprotocol.xyz/v1/cards \
+  -H "Content-Type: application/json" \
+  -d '{"card": "mind_risk_scoring", "wallet": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"}'
+```
+
+The agent receives a `402 Payment Required` response with USDC payment instructions. Payment is automatic for any agent with a funded wallet. No signup, no API key, no dashboard.
+
+### Option 2 — API key (MCP / Claude Desktop)
+
+```bash
 export MIND_API_KEY=your_key_here
 ./install.sh
 ```
 
 Get an API key: [mindprotocol.xyz](https://www.mindprotocol.xyz)
 
+## Intelligence cards
+
+| Card | What it returns | Price |
+|------|-----------------|-------|
+| `mind_signals` | Pyth price + momentum at current Solana slot | 0.010 USDC |
+| `mind_counterparty_check` | Safe/Caution/Block verdict for a recipient wallet | 0.015 USDC |
+| `mind_risk_scoring` | Concentration risk score (0–100) + PASS/WARN/BLOCK | 0.0154 USDC |
+| `mind_market_intelligence` | Full SPL token balances + portfolio composition | 0.020 USDC |
+| `mind_wallet_profile` | Behavioral archetype + activity fingerprint | 0.025 USDC |
+| `mind_token_intelligence` | Holder concentration + insider flags + rug indicators | 0.035 USDC |
+| `mind_portfolio_audit` | Full portfolio risk report + DeFi exposure + token checks | 0.10 USDC |
+| `mind_verify_proof` | Verify any mindprint hash | free |
+
 ## Skill structure
 
 ```
 skill/
-  SKILL.md         ← entry point
-  signals.md       ← Pyth price signals
-  portfolio.md     ← wallet/portfolio analysis
-  risk.md          ← risk scoring + PASS/BLOCK gate
-  proofs.md        ← mindprint verification
-  mcp.md           ← MCP server setup
+  SKILL.md               ← entry point (progressive loading)
+  signals.md             ← Pyth price signals
+  portfolio.md           ← wallet/portfolio analysis
+  counterparty.md        ← pre-tx counterparty check
+  risk.md                ← risk scoring + PASS/BLOCK gate
+  wallet-profile.md      ← behavioral fingerprint
+  token-intelligence.md  ← token safety analysis
+  portfolio-audit.md     ← full portfolio audit
+  proofs.md              ← mindprint verification
+  mcp.md                 ← MCP server setup
 agents/
   mind-trader-agent.md   ← reference A2A agent config
 commands/
@@ -77,7 +116,15 @@ Returns the exact inputs and response the agent used — tied to the Solana slot
 
 Skills like sendaifun/skills and jup-ag/agent-skills execute DeFi actions. MIND is the pre-flight layer that makes those actions auditable. It answers the question every A2A protocol eventually hits: *how do you prove the agent acted on real, unmodified data?*
 
-No other skill in the kit produces tamper-evident audit trails per tool call. That is the gap MIND fills.
+No other skill in the kit produces tamper-evident audit trails per tool call — and no other skill accepts autonomous micropayments without requiring a human to register or manage an API key.
+
+## MIND Builder Program
+
+Build a skill using MIND intelligence cards and earn **20% of every call it generates** — paid weekly to your Solana wallet.
+
+Open to all Superteam Brasil members and Solana builders globally.
+
+[See BUILDERS.md for details and registration →](BUILDERS.md)
 
 ## License
 
