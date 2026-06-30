@@ -35,7 +35,7 @@ This is the trust layer A2A protocols need to operate on Solana without a human 
 ## Install
 
 ```bash
-git clone https://github.com/mindprotocol/mind-intelligence-skill
+git clone https://github.com/DGuedz/mind-intelligence-skill
 cd mind-intelligence-skill
 ./install.sh
 ```

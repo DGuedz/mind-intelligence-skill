@@ -6,7 +6,7 @@
   "keywords": ["solana", "ai-kit", "mcp", "agent", "defi", "risk", "pyth", "intelligence"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mindprotocol/mind-intelligence-skill"
+    "url": "https://github.com/DGuedz/mind-intelligence-skill"
   },
   "scripts": {
     "mcp": "node dist/mcp-server.js"

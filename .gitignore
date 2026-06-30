@@ -1,0 +1,9 @@
+# External skills installed locally (not part of this submission)
+.agents/
+skills-lock.json
+
+# Node
+node_modules/
+dist/
+.env
+*.log

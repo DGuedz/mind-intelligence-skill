@@ -37,22 +37,6 @@ cp -r "$SKILL_DIR/skill" "$DEST/"
 
 echo "Skill installed to: $DEST"
 echo ""
-
-# CLAUDE.md placement
-if [[ -f "$SKILL_DIR/CLAUDE.md" ]]; then
-  echo "CLAUDE.md placement:"
-  echo "  1) ~/.claude/CLAUDE.md (personal)"
-  echo "  2) ./CLAUDE.md (project root)"
-  echo "  3) Skip"
-  read -rp "Choice [1]: " MD_CHOICE
-  MD_CHOICE="${MD_CHOICE:-1}"
-  case "$MD_CHOICE" in
-    1) cp "$SKILL_DIR/CLAUDE.md" "$HOME/.claude/CLAUDE.md" ;;
-    2) cp "$SKILL_DIR/CLAUDE.md" "./CLAUDE.md" ;;
-  esac
-fi
-
-echo ""
 echo "Usage (x402 — no API key):"
 echo "  curl https://api.mindprotocol.xyz/v1/cards \\"
 echo "    -H 'Content-Type: application/json' \\"

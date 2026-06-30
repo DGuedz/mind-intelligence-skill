@@ -43,7 +43,7 @@ Add to your MCP config:
 Clone and run locally:
 
 ```bash
-git clone https://github.com/mindprotocol/mind-intelligence-skill
+git clone https://github.com/DGuedz/mind-intelligence-skill
 cd mind-intelligence-skill
 npm install
 MIND_API_URL=http://localhost:3000 MIND_API_KEY=local npm run mcp
