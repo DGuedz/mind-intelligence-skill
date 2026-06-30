@@ -1,20 +1,16 @@
 ---
 name: mind-intelligence
-description: Trust layer for A2A agents on Solana — price signals from Pyth (on-chain), portfolio data from Covalent/GoldRush, wallet risk scoring, counterparty checks, token intelligence, and portfolio audits. Every response carries a mindprint proof anchored to a Solana slot. Supports x402 micropayments (no API key required) and traditional API key auth.
+description: Complete MIND stack for Solana agents — intelligence layer (Pyth price signals, portfolio analysis, risk scoring, mindprint proofs) + x402 payment lifecycle (HTTP 402 detection, policy gate, human approval, idempotent SPL USDC settlement, proof bundle). Two skills, one install.
 user-invocable: true
 ---
 
-# MIND Intelligence Skill
+# MIND Skill — Intelligence + x402 Payments
 
-> Trust layer for A2A agents on Solana. Price signals from Pyth (on-chain), portfolio data from Covalent/GoldRush, risk scoring — every response carries a mindprint proof anchored to a Solana slot.
+> Two complementary layers for autonomous Solana agents: verify before acting, pay to access, prove what happened.
 
-## What this skill does
+## Layer 1 — Intelligence (trust layer)
 
-MIND connects agents to native Solana data sources and produces a cryptographic proof for every tool call. The proof ties the agent's decision to a specific Solana slot — making it independently verifiable by any party after the fact.
-
-This is not a generic market data wrapper. The slot anchor is what makes A2A coordination auditable: when one agent acts on another's signal, the chain of proofs shows exactly what each agent saw, when, and from which source.
-
-## When to load sub-skills
+MIND connects agents to native Solana data sources and wraps every response in a **mindprint** — a SHA-256 proof anchored to a specific Solana slot. Tamper-evident, independently verifiable, no reconstruction needed.
 
 | Task | Price | Load |
 |------|-------|------|
@@ -28,41 +24,44 @@ This is not a generic market data wrapper. The slot anchor is what makes A2A coo
 | Verify a prior mindprint proof by hash | free | [proofs.md](proofs.md) |
 | Connect via MCP (Claude Desktop, Cursor, any MCP client) | — | [mcp.md](mcp.md) |
 
-## Quick start — no API key (x402 micropayments)
+## Layer 2 — x402 Payment Lifecycle
+
+Complete HTTP 402 payment protocol for agents hitting any paid API on Solana:
+
+```
+Agent Intent → Policy Gate → Human Approval → SPL USDC Settlement → TX Confirm → Proof Bundle
+```
+
+| Task | Load |
+|------|------|
+| Understand x402 protocol and when to use it | [x402/SKILL.md](x402/SKILL.md) |
+| Full payment flow step-by-step | [x402/docs/payment-flow.md](x402/docs/payment-flow.md) |
+| Policy gates, budget limits, allowlist | [x402/docs/policy-gates.md](x402/docs/policy-gates.md) |
+| Human approval gate design | [x402/docs/human-approval.md](x402/docs/human-approval.md) |
+| Proof bundle and SHA-256 hash chain | [x402/docs/proof-bundle.md](x402/docs/proof-bundle.md) |
+| RPC reliability, fallback, retry | [x402/docs/rpc-reliability.md](x402/docs/rpc-reliability.md) |
+| Dry run example (no real tx) | [../examples/dry-run.md](../examples/dry-run.md) |
+
+## Quick start
 
 ```bash
 ./install.sh
 ```
 
 ```bash
-# Any card — payment handled automatically via x402
+# Intelligence card — 402 handled automatically by the agent
 curl https://api.mindprotocol.xyz/v1/cards \
   -H "Content-Type: application/json" \
   -d '{"card": "mind_risk_scoring", "wallet": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU"}'
+# → 402 Payment Required with recipient + amountMinor
+# → Agent pays via x402 lifecycle (see x402/SKILL.md)
+# → 200 + card data + mindprint proof
 ```
-
-The endpoint returns a 402 Payment Required with payment instructions. The agent pays fractions of USDC automatically. No wallet setup, no API key, no registration.
-
-## Quick start — API key (traditional)
-
-```bash
-export MIND_API_KEY=your_key_here
-./install.sh
-```
-
-Get an API key: [mindprotocol.xyz](https://www.mindprotocol.xyz)
-
-## Data sources (native Solana)
-
-| Source | What it provides |
-|--------|-----------------|
-| Pyth Network (on-chain oracle) | Real-time price feeds — SOL, JUP, BONK, USDC, USDT, WETH, WBTC, RAY, MSOL, STSOL, HNT |
-| Covalent / GoldRush | SPL token balances, portfolio composition, historical positions |
 
 ## Key invariants
 
-- Every response includes a `mindprint` field — preserve it; it is the proof of what the agent saw
-- Risk score >= 80 → automatic BLOCK; the agent must not execute
+- Every intelligence response includes a `mindprint` — preserve it; it is the proof of what the agent saw
+- Risk score >= 80 → automatic BLOCK; agent must not execute
+- x402 settlement requires human approval before real funds move — not bypassable
 - Pyth signals carry the Solana slot at query time — verifiable on-chain
-- Portfolio data covers all SPL tokens, not just whitelisted assets
-- x402 payments are sub-cent; agents may call without human approval for any single card
+- Degraded mode on RPC failure — never claims false success

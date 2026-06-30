@@ -1,6 +1,6 @@
 # mind-intelligence-skill
 
-> The trust layer for A2A agents on Solana. Verified market data from native on-chain sources — every decision leaves a cryptographic proof tied to a Solana slot.
+> Two complementary layers for autonomous Solana agents: **intelligence** (verify before acting) + **x402 payments** (pay to access, prove what happened).
 
 A skill for the [Solana AI Kit](https://github.com/solanabr/solana-ai-kit).
 
@@ -80,7 +80,7 @@ Get an API key: [mindprotocol.xyz](https://www.mindprotocol.xyz)
 
 ```
 skill/
-  SKILL.md               ← entry point (progressive loading)
+  SKILL.md               ← entry point (routes both layers)
   signals.md             ← Pyth price signals
   portfolio.md           ← wallet/portfolio analysis
   counterparty.md        ← pre-tx counterparty check
@@ -90,10 +90,22 @@ skill/
   portfolio-audit.md     ← full portfolio audit
   proofs.md              ← mindprint verification
   mcp.md                 ← MCP server setup
+  x402/
+    SKILL.md             ← x402 payment layer entry point
+    docs/
+      x402-overview.md   ← what x402 is and when to use it
+      payment-flow.md    ← step-by-step lifecycle
+      policy-gates.md    ← budget, allowlist, risk gates
+      human-approval.md  ← HITL gate design
+      proof-bundle.md    ← SHA-256 receipt hash chain
+      rpc-reliability.md ← fallback and retry
 agents/
   mind-trader-agent.md   ← reference A2A agent config
+  x402-payment-agent.md  ← x402 payment agent config
 commands/
   mind-check.md          ← /mind-check pre-flight command
+examples/
+  dry-run.md             ← x402 dry run (no real tx)
 ```
 
 ## Usage in an A2A flow
